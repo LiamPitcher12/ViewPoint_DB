@@ -1,0 +1,22 @@
+SELECT CustName, Email, Query, SearchDate
+FROM Customer
+JOIN SearchResult ON Customer.SearchID = SearchResult.SearchID;
+
+SELECT Property.Address, Property.PropertyType, Agent.AgentName, Agent.AgencyName
+FROM Property
+JOIN Agent ON Property.PropertyID = Agent.PropertyID;
+
+SELECT Agent.AgentName, COUNT(Property.PropertyID) AS PropertyCount
+FROM Agent
+JOIN Property ON Agent.PropertyID = Property.PropertyID
+GROUP BY Agent.AgentName;
+
+SELECT Property.Address, Inspection.InspectionType, Inspection.Results
+FROM Inspection
+JOIN Property ON Inspection.PropertyID = Property.PropertyID
+WHERE Inspection.Results LIKE '%Minor%' OR Inspection.Results LIKE '%Failed%';
+
+SELECT Location.City, AVG(Property.AskingPrice) AS AvgPrice
+FROM Property
+JOIN Location ON Property.PropertyID = Location.PropertyID
+GROUP BY Location.City;
